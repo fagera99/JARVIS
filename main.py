@@ -1,0 +1,10 @@
+"""
+JARVIS - Entry point
+
+Your AI Agent with Iron Memory.
+"""
+
+from jarvis.cli import run_cli
+
+if __name__ == "__main__":
+    run_cli()
