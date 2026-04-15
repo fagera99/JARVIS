@@ -11,7 +11,7 @@ class Message:
 
     role: str  # 'user', 'assistant', or 'system'
     content: str
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     metadata: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -36,8 +36,8 @@ class Memory:
     content: str
     memory_type: str  # 'fact', 'preference', 'work_style', 'context', 'event'
     importance: float  # 0.0 to 1.0
-    created_at: datetime = field(default_factory=datetime.utcnow)
-    updated_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     access_count: int = 0
     tags: list[str] = field(default_factory=list)
     metadata: dict[str, Any] = field(default_factory=dict)
@@ -53,8 +53,8 @@ class UserProfile:
     preferences: dict[str, Any] = field(default_factory=dict)
     frequent_topics: list[str] = field(default_factory=list)
     interaction_count: int = 0
-    first_seen: datetime = field(default_factory=datetime.utcnow)
-    last_seen: datetime = field(default_factory=datetime.utcnow)
+    first_seen: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    last_seen: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
     def to_summary(self) -> str:
         """Generate a text summary of the user profile."""

@@ -354,7 +354,8 @@ Current date and time: {current_datetime}
 
             # Process tool calls
             tool_calls = choice.message.tool_calls
-            messages.append(choice.message)  # Add assistant message with tool calls
+            # Convert the OpenAI message object to a dict for subsequent API calls
+            messages.append(choice.message.model_dump(exclude_unset=True))
 
             for tool_call in tool_calls:
                 tool_name = tool_call.function.name
@@ -452,7 +453,8 @@ Current date and time: {current_datetime}
             return None
 
         messages = messages.copy()
-        messages.append(choice.message)
+        # Convert the OpenAI message object to a dict for subsequent API calls
+        messages.append(choice.message.model_dump(exclude_unset=True))
 
         for tool_call in choice.message.tool_calls:
             tool_name = tool_call.function.name
